@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Party } from '../models/party.model';
+import { Party } from '../../models/party.model';
 
 @Component({
   selector: 'app-party-list',

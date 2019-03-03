@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "robohydra": "node node_modules\\robohydra\\bin\\robohydra -n",
-    "dev": "npm-run-parallel start robohydra"
+    "mock": "node node_modules\\robohydra\\bin\\robohydra -n",
+    "dev": "npm-run-parallel start mock"
   },
   "private": true,
   "dependencies": {
