@@ -1,0 +1,6 @@
+<div *ngIf="partyList && partyList.length > 0">
+  <div>Party list:</div>
+  <ul>
+    <li *ngFor="let party of partyList">{{ party.name }}</li>
+  </ul>
+</div>
