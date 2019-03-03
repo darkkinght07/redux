@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should read h1 title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to redux!');
+    expect(page.getTitleText()).toEqual('Model-based Form Example:');
   });
 
   afterEach(async () => {

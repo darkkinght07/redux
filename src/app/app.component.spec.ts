@@ -1,25 +1,11 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { PartyListComponent } from './party-list/party-list.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TestStore } from './store/test-utils/test.store';
-import { AppState } from './store/app.state';
 import { reducerHomePage } from './store/reducers/app.reducers';
-import { by } from 'protractor';
+import { PartyListComponent } from './views/party-list/party-list.component';
 
 describe('AppComponent', () => {
-
-  let store: TestStore<AppState>;
-  let testState: AppState = {
-    homePage: {
-      loaded: true,
-      partyList: [{
-        code: '1',
-        name: 'party 1'
-      }]
-    }
-  }
 
   beforeEach( ( () => {
     TestBed.configureTestingModule({
@@ -28,7 +14,7 @@ describe('AppComponent', () => {
         PartyListComponent
       ],
       providers: [
-        { provide: Store, useClass: TestStore }   // use test store instead of ngrx store
+        Store
       ],
       imports: [
         ReactiveFormsModule,
@@ -37,14 +23,14 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('should create the component', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
 
     expect(app).toBeTruthy();
   });
 
-  it('check initial state of the components', () => {
+  it('initial values in form are invalid', () => {
     let fixture = TestBed.createComponent(AppComponent);
     let component = fixture.componentInstance;
     fixture.detectChanges();
@@ -55,7 +41,7 @@ describe('AppComponent', () => {
     expect(component.form.valid).toBeFalsy();
   });
 
-  it('create a valid form', inject([Store], (testStore: TestStore<AppState>) => {
+  it('update fields for a valid form', () => {
     let fixture = TestBed.createComponent(AppComponent);
     let component = fixture.componentInstance;
     fixture.detectChanges();
@@ -65,5 +51,5 @@ describe('AppComponent', () => {
     expect(component.form.get('firstName').value).toBe('name');
     expect(component.form.get('password').value).toBe('pwd');
     expect(component.form.valid).toBeTruthy();
-  }));
+  });
 });
