@@ -1,11 +1,7 @@
 import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
+  ActionReducerMap
 } from '@ngrx/store';
-import { reducerHomePage } from './reducers/app.reducers';
+import { reducerHomePage, initialHomePageState } from './reducers/app.reducers';
 import { Party } from '../models/party.model';
 
 export interface AppState {
@@ -16,4 +12,7 @@ export interface HomePageState {
   loaded: boolean;
   partyList: Party[]
 }
-// export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
+
+export const AppStateReducers: ActionReducerMap<AppState> = {
+  homePage: reducerHomePage
+}

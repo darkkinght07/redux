@@ -9,9 +9,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { reducerHomePage } from './store/reducers/app.reducers';
 import { AppEffects } from './store/effects/app.efects';
 import { PartyService } from './services/party.service';
+import { AppStateReducers } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -19,9 +19,9 @@ import { PartyService } from './services/party.service';
     PartyListComponent
   ],
   imports: [
-    BrowserModule, 
-    ReactiveFormsModule, 
-    StoreModule.forRoot({homePage: reducerHomePage}), 
+    BrowserModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(AppStateReducers),
     EffectsModule.forRoot([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

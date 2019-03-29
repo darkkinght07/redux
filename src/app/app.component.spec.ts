@@ -1,24 +1,25 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
-import { reducerHomePage } from './store/reducers/app.reducers';
 import { PartyListComponent } from './views/party-list/party-list.component';
+import { AppStoreService } from './store/service/app-store.service';
 
 describe('AppComponent', () => {
 
-  beforeEach( ( () => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         PartyListComponent
       ],
       providers: [
-        Store
+        Store,
+        AppStoreService
       ],
       imports: [
         ReactiveFormsModule,
-        StoreModule.forRoot({homePage: reducerHomePage})
+        StoreModule.forRoot({})
       ]
     }).compileComponents();
   }));
@@ -46,7 +47,7 @@ describe('AppComponent', () => {
     let component = fixture.componentInstance;
     fixture.detectChanges();
 
-    component.form.patchValue({'firstName': 'name', 'password': 'pwd'});
+    component.form.patchValue({ 'firstName': 'name', 'password': 'pwd' });
 
     expect(component.form.get('firstName').value).toBe('name');
     expect(component.form.get('password').value).toBe('pwd');
