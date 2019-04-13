@@ -1,28 +1,31 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PartyListComponent } from './views/party-list/party-list.component';
 import { AppStoreService } from './store/service/app-store.service';
+import { MockAppStore } from './store/test-utils/test.store';
 
 describe('AppComponent', () => {
-
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         PartyListComponent
       ],
       providers: [
-        Store,
-        AppStoreService
+        AppStoreService,
+        {
+          provide: Store,
+          useClass: MockAppStore
+        }
       ],
       imports: [
         ReactiveFormsModule,
         StoreModule.forRoot({})
       ]
     }).compileComponents();
-  }));
+  });
 
   it('should create the component', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -32,8 +35,8 @@ describe('AppComponent', () => {
   });
 
   it('initial values in form are invalid', () => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
@@ -43,11 +46,11 @@ describe('AppComponent', () => {
   });
 
   it('update fields for a valid form', () => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
     fixture.detectChanges();
 
-    component.form.patchValue({ 'firstName': 'name', 'password': 'pwd' });
+    component.form.patchValue({ firstName: 'name', password: 'pwd' });
 
     expect(component.form.get('firstName').value).toBe('name');
     expect(component.form.get('password').value).toBe('pwd');
