@@ -1,5 +1,9 @@
 import { Party } from '../models/party.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root',
+})
 export class PartyService {
     getPartyList(): Party[] {
         const partyList: Party[] = [];

@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { AppEffects } from './store/effects/app.efects';
 import { PartyService } from './services/party.service';
 import { AppStateReducers } from './store/app.state';
+import { AppStoreService } from './store/service/app-store.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,6 @@ import { AppStateReducers } from './store/app.state';
     EffectsModule.forRoot([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [PartyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
